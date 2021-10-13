@@ -8,12 +8,15 @@ class MoviesController < ApplicationController
 
   def index
     sorting = params[:sort_by]
+    ratings = params[:ratings]
+    if not sorting and not ratings
+      session[:ratings] = nil
+    end
     if sorting
       session[:sort_by] = sorting
     else
       sorting = session[:sort_by]
     end
-    ratings = params[:ratings]
     if ratings
       session[:ratings] = ratings
     else
