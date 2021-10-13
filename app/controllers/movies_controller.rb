@@ -15,6 +15,11 @@ class MoviesController < ApplicationController
     end
     ratings = params[:ratings]
     if ratings
+      session[:ratings] = ratings
+    else
+      ratings = session[:ratings]
+    end
+    if ratings
       @ratings_to_show = ratings.keys
       if sorting
         @movies = Movie.with_ratings(@ratings_to_show).order(sorting)
